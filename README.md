@@ -1,57 +1,152 @@
-# FormFlow Automation Suite Demo
+# FormFlow Automation Suite
 
-This is a static HTML demo of the FormFlow Automation Suite, showcasing the user interface and key functionality of the application.
+A complete solution for automating PDF form data extraction and submission to government websites.
 
-## Overview
+## Features
 
-FormFlow Automation Suite is a comprehensive solution that automates the extraction of data from filled-out PDF forms and submits this data to government websites. This demo provides a visual representation of the user interface and simulates the core functionality.
+- **PDF Form Data Extraction**: Upload and parse filled-out PDF forms using pdf-lib and pdf-parse
+- **Form Submission Automation**: Automate data entry into government websites using Puppeteer
+- **Dashboard Interface**: Modern UI built with Next.js and TailwindCSS
+- **Submission Tracking**: Monitor the status of all form submissions
+- **Detailed Logging**: Comprehensive logging system for debugging and auditing
+- **Email Notifications**: Get notified when submissions succeed or fail
+- **Authentication**: Secure access for internal staff only
 
-## Demo Pages
+## Tech Stack
 
-The demo consists of the following pages:
+- **Frontend**: Next.js, React, TailwindCSS
+- **Backend**: Node.js, Next.js API Routes
+- **Database**: SQLite (via sqlite3)
+- **PDF Processing**: pdf-lib, pdf-parse
+- **Web Automation**: Puppeteer
+- **Authentication**: NextAuth.js
+- **Email**: Custom email utility (can be integrated with SendGrid, Mailgun, etc.)
+- **Logging**: Winston + custom logging system
 
-1. **Dashboard** (`index.html`): Provides an overview of form submissions, statistics, and recent activity.
-2. **Upload Form** (`upload.html`): Demonstrates the form upload, parsing, and submission process.
-3. **Logs** (`logs.html`): Shows the logging system for tracking form processing and submission activities.
+## Getting Started
 
-## How to Use the Demo
+### Prerequisites
 
-1. Open any of the HTML files in a web browser to view the demo.
-2. Navigate between pages using the sidebar menu.
-3. On the Upload Form page, you can:
-   - Upload a PDF file (simulated)
-   - View the parsed form data (mock data)
-   - Submit the form to a government website (simulated)
-4. On the Logs page, you can:
-   - Filter logs by level and date
-   - View detailed information about each log entry
-   - Navigate through paginated log entries
+- Node.js 16+ and npm
+- Git
 
-## Note
+### Installation
 
-This is a static HTML demo that simulates the functionality of the actual FormFlow Automation Suite. The real application is built with Next.js, TypeScript, and includes backend functionality for PDF parsing and web automation.
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd formflow-automation-suite
+   ```
 
-## Actual System Features
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-The complete FormFlow Automation Suite includes:
+3. Start the development server:
+   ```
+   npm run dev
+   ```
 
-1. **PDF Form Data Extraction**:
-   - Upload PDF forms
-   - Extract data using pdf-lib and pdf-parse
-   - Validate and transform extracted data
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-2. **Web Automation**:
-   - Automate data submission to government websites using Puppeteer
-   - Error handling and logging for submission processes
+### Default Credentials
 
-3. **User Interface**:
-   - Responsive dashboard built with Next.js and TailwindCSS
-   - Form uploads, submission tracking, and logging
+- **Admin User**: admin@example.com / admin123
+- **Staff User**: staff@example.com / staff123
 
-4. **Logging System**:
-   - Comprehensive logging for debugging and auditing
-   - Support for different log levels (info, warning, error, success)
+## Project Structure
 
-5. **Authentication**:
-   - User authentication with NextAuth.js
-   - Role-based access control
+```
+formflow-automation-suite/
+├── src/
+│   ├── components/       # React components
+│   ├── lib/
+│   │   ├── pdf/          # PDF parsing utilities
+│   │   └── automation/   # Puppeteer automation code
+│   ├── pages/
+│   │   ├── api/          # API routes
+│   │   │   ├── auth/     # Authentication endpoints
+│   │   │   ├── uploads/  # Form upload endpoints
+│   │   │   ├── submissions/ # Submission endpoints
+│   │   │   └── logs/     # Logging endpoints
+│   │   ├── _app.tsx      # Next.js App component
+│   │   ├── index.tsx     # Dashboard page
+│   │   ├── upload.tsx    # Form upload page
+│   │   ├── submissions.tsx # Submissions page
+│   │   └── logs.tsx      # Logs page
+│   ├── styles/           # Global styles
+│   ├── types/            # TypeScript type definitions
+│   └── utils/            # Utility functions
+├── public/               # Static assets
+├── .gitignore
+├── next.config.js
+├── package.json
+├── postcss.config.js
+├── tailwind.config.js
+└── tsconfig.json
+```
+
+## Usage Guide
+
+### Uploading a PDF Form
+
+1. Navigate to the "Upload Form" page
+2. Drag and drop a PDF form or click to select a file
+3. Click "Upload and Parse" to extract data from the form
+4. Review the extracted data
+5. Click "Submit to Government Website" to start the automation process
+
+### Monitoring Submissions
+
+1. Navigate to the "Submissions" page to see all form submissions
+2. Use filters to find specific submissions
+3. Click on a submission to view details
+4. For failed submissions, you can click "Retry" to attempt again
+
+### Viewing Logs
+
+1. Navigate to the "Logs" page to see system logs
+2. Use filters to find specific log entries
+3. Logs are color-coded by level (info, warning, error, success)
+
+## Customization
+
+### Adding New Form Types
+
+To add support for a new type of PDF form:
+
+1. Create a custom parser in `src/lib/pdf/` if needed
+2. Add field mappings in `src/lib/automation/formSubmitter.ts`
+3. Test with sample PDFs
+
+### Adding New Government Websites
+
+To add support for a new government website:
+
+1. Create a new configuration in `src/lib/automation/` with:
+   - URL
+   - Field mappings
+   - Submit button selector
+   - Success/error indicators
+   - Any pre/post submission steps
+
+## Security Considerations
+
+- All PDF processing is done server-side
+- Authentication is required for all operations
+- Role-based access control limits what users can do
+- Sensitive data is not stored long-term
+- Puppeteer runs in a secure, isolated environment
+
+## License
+
+This project is licensed under the ISC License.
+
+## Acknowledgements
+
+- [Next.js](https://nextjs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Puppeteer](https://pptr.dev/)
+- [pdf-lib](https://pdf-lib.js.org/)
+- [NextAuth.js](https://next-auth.js.org/)
